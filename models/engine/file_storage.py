@@ -4,6 +4,7 @@ import json
 from os import path
 from datetime import datetime
 
+
 class FileStorage:
     """ Class doc"""
     __file_path = 'file.json'
@@ -24,15 +25,14 @@ class FileStorage:
 
     def reload(self):
         """ reload doc"""
+        from models.base_model import BaseModel
         if not path.exists(FileStorage.__file_path):
             return
         try:
             with open(FileStorage.__file_path, encoding='utf-8') as f:
                 data = json.load(f)
-                for key, value in data.items():
-                    for k, v in value.items():
-                        if k in ['created_at', 'updated_at']:
-                            value[k] = datetime.fromisoformat(v)
-                FileStorage.__objects = data
+            for key, value in data.items():
+                data[key] = BaseModel(**value)
+            FileStorage.__objects = data
         except json.decoder.JSONDecodeError:
             FileStorage.__objects = {}
