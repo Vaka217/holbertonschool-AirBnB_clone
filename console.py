@@ -1,12 +1,11 @@
-""" Module doc"""
 #!/usr/bin/python3
+""" Module doc"""
 import cmd
 
 
 
 class HBNBCommand(cmd.Cmd):
     """ Class doc"""
-    intro = "An intro"
     prompt = "(hbnb) "
     file = None
 
