@@ -2,7 +2,6 @@
 """ Module doc"""
 import json
 from os import path
-from datetime import datetime
 
 
 class FileStorage:
@@ -16,23 +15,22 @@ class FileStorage:
 
     def new(self, obj):
         """ new doc"""
-        FileStorage.__objects[f'{obj.__class__.__name__}.{getattr(obj, "id")}'] = obj.__dict__
+        FileStorage.__objects[f'{obj.__class__.__name__}.{getattr(obj, "id")}'] = obj
 
     def save(self):
         """ save doc"""
-        with open(FileStorage.__file_path, mode='w', encoding='utf-8') as f:
-            json.dump(FileStorage.__objects, f, default=str)
+        objs_dict = self.__objects
+        objs_dump = {key: value.to_dict() for key, value in objs_dict.items()}
+        with open(self.__file_path, mode='w', encoding='utf-8') as f:
+            json.dump(objs_dump, f)
 
     def reload(self):
         """ reload doc"""
         from models.base_model import BaseModel
-        if not path.exists(FileStorage.__file_path):
+        if not path.exists(self.__file_path):
             return
-        try:
-            with open(FileStorage.__file_path, encoding='utf-8') as f:
-                data = json.load(f)
-            for key, value in data.items():
-                data[key] = BaseModel(**value)
-            FileStorage.__objects = data
-        except json.decoder.JSONDecodeError:
+        with open(self.__file_path, encoding='utf-8') as f:
+            data = json.load(f)
             FileStorage.__objects = {}
+            for key, value in data.items():
+                self.__objects[key] = BaseModel(**value)
