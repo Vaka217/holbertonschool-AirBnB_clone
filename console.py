@@ -56,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, argv):
         """ do_all doc"""
         inputs = argv.split()
-        if inputs[0] != 'BaseModel':
+        if not inputs or inputs[0] != 'BaseModel':
             print("** class doesn't exist **")
         else:
             list = []

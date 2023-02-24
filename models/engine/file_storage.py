@@ -27,10 +27,22 @@ class FileStorage:
     def reload(self):
         """ reload doc"""
         from models.base_model import BaseModel
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
+
         if not path.exists(self.__file_path):
             return
+        classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
+                    'City': City, 'Amenity': Amenity, 'Place': Place,
+                    'Review': Review}
         with open(self.__file_path, encoding='utf-8') as f:
             data = json.load(f)
             FileStorage.__objects = {}
             for key, value in data.items():
-                self.__objects[key] = BaseModel(**value)
+                other_key = key.split(".")[0]
+                print(other_key)
+                self.__objects[key] = classes[other_key](**value)
