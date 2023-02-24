@@ -1,14 +1,25 @@
 #!/usr/bin/python3
 """ Module doc"""
-import cmd, json, inspect, readline
+import cmd
+import json
 from models.base_model import BaseModel
-from sys import argv
-from models.engine.file_storage import FileStorage
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from models import storage
+from models.engine.file_storage import FileStorage
+
+
 class HBNBCommand(cmd.Cmd):
     """ Class doc"""
     prompt = "(hbnb) "
     file = None
+    classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
+                    'City': City, 'Amenity': Amenity, 'Place': Place,
+                    'Review': Review}
 
     def do_quit(self, arg):
         """ do_quit doc"""
@@ -27,10 +38,10 @@ class HBNBCommand(cmd.Cmd):
         inputs = argv.split()
         if not inputs:
             print("** class name missing **")
-        elif inputs[0] != 'BaseModel':
+        elif inputs[0] not in HBNBCommand.classes.keys():
             print("** class doesn't exist **")
         else:
-            instance = BaseModel()
+            instance = HBNBCommand.classes[inputs[0]]()
             print(instance.id)
             instance.save()
 
@@ -39,12 +50,13 @@ class HBNBCommand(cmd.Cmd):
         inputs = argv.split()
         if not inputs:
             print("** class name missing **")
-        elif inputs[0] != 'BaseModel':
+        elif inputs[0] not in HBNBCommand.classes.keys():
             print("** class doesn't exist **")
         elif len(inputs) < 2:
             print("** instance id missing **")
         else:
             key = inputs[0] + '.' + inputs[1]
+            storage.reload()
             if not key in storage.all():
                 print("** no instance found **")
             else:
@@ -56,13 +68,14 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, argv):
         """ do_all doc"""
         inputs = argv.split()
-        if not inputs or inputs[0] != 'BaseModel':
+        if not inputs or inputs[0] not in HBNBCommand.classes.keys():
             print("** class doesn't exist **")
         else:
             list = []
-            all_objs = storage.all()
-            for obj_id in all_objs.keys():
-                list.append(str(all_objs[obj_id]))
+            storage.reload()
+            for obj_id in storage.all().keys():
+                if obj_id.split(".")[0] == inputs[0]:
+                    list.append(str(storage.all()[obj_id]))
             print(list)
 
     def do_destroy(self, argv):
@@ -70,33 +83,31 @@ class HBNBCommand(cmd.Cmd):
         inputs = argv.split()
         if not inputs:
             print("** class name missing **")
-        elif inputs[0] != 'BaseModel':
+        elif inputs[0] not in HBNBCommand.classes.keys():
             print("** class doesn't exist **")
         elif len(inputs) < 2:
             print("** instance id missing **")
         else:
             key = inputs[0] + '.' + inputs[1]
+            storage.reload()
             if not key in storage.all():
                 print("** no instance found **")
             else:
                 storage.all().pop(key)
-                with open('file.json') as f:
-                    d = json.load(f)
-                del d[key]
-                with open('file.json', 'w') as f:
-                    json.dump(d, f)
+                storage.save()
 
     def do_update(self, argv):
         """ do_update doc"""
         inputs = argv.split()
         if not inputs:
             print("** class name missing **")
-        elif inputs[0] != 'BaseModel':
+        elif inputs[0] not in HBNBCommand.classes.keys():
             print("** class doesn't exist **")
         elif len(inputs) < 2:
             print("** instance id missing **")
         else:
             key = inputs[0] + '.' + inputs[1]
+            storage.reload()
             if not key in storage.all():
                 print("** no instance found **")
             elif len(inputs) < 3:
@@ -104,13 +115,8 @@ class HBNBCommand(cmd.Cmd):
             elif len(inputs) < 4:
                 print("** value missing **")
             else:
-                all_objs = storage.all()
-                setattr(all_objs[key], inputs[2], inputs[3])
-                with open('file.json') as f:
-                    d = json.load(f)
-                d[key][inputs[2]] = inputs[3]
-                with open('file.json', 'w') as f:
-                    json.dump(d, f)
+                setattr(storage.all()[key], inputs[2], inputs[3])
+                storage.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
