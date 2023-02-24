@@ -68,15 +68,18 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, argv):
         """ do_all doc"""
         inputs = argv.split()
-        if not inputs or inputs[0] not in HBNBCommand.classes.keys():
+        if not inputs:
+            storage.reload()
+            print(list((storage.all())))
+        elif inputs[0] not in HBNBCommand.classes.keys():
             print("** class doesn't exist **")
         else:
-            list = []
+            list_all = []
             storage.reload()
             for obj_id in storage.all().keys():
                 if obj_id.split(".")[0] == inputs[0]:
-                    list.append(str(storage.all()[obj_id]))
-            print(list)
+                    list_all.append(str(storage.all()[obj_id]))
+            print(list_all)
 
     def do_destroy(self, argv):
         """ do_destroy doc"""
