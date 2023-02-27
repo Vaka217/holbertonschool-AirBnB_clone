@@ -15,7 +15,8 @@ class FileStorage:
 
     def new(self, obj):
         """ new doc"""
-        FileStorage.__objects[f'{obj.__class__.__name__}.{getattr(obj, "id")}'] = obj
+        FileStorage.__objects[f'{obj.__class__.__name__}.'
+                              f'{getattr(obj, "id")}'] = obj
 
     def save(self):
         """ save doc"""
@@ -37,12 +38,11 @@ class FileStorage:
         if not path.exists(self.__file_path):
             return
         classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
-                    'City': City, 'Amenity': Amenity, 'Place': Place,
-                    'Review': Review}
+                   'City': City, 'Amenity': Amenity, 'Place': Place,
+                   'Review': Review}
         with open(self.__file_path, encoding='utf-8') as f:
             data = json.load(f)
             FileStorage.__objects = {}
             for key, value in data.items():
                 other_key = key.split(".")[0]
-                print(other_key)
                 self.__objects[key] = classes[other_key](**value)

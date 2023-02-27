@@ -65,3 +65,7 @@ class TestBase(unittest.TestCase):
         self.assertEqual(TestBase.base.__str__(),
                          f'[{TestBase.base.__class__.__name__}] '
                          f'({TestBase.base.id}) {TestBase.base.__dict__}')
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -2,18 +2,32 @@
 """ unittest User module"""
 import unittest
 from models.user import User
+from models.base_model import BaseModel
 
 
 class TestUser(unittest.TestCase):
     """ class for test cases related with the User class"""
 
-    def test_user(self):
-        """ Test all User class attributes"""
+    def setUp(self):
+        """ Return class attributes"""
+        User.email = ""
+        User.password = ""
+        User.first_name = ""
+        User.last_name = ""
+
+    def test_instance(self):
+        """ Test if User is instance of BaseModel"""
         my_user = User()
-        my_user.first_name = "Betty"
-        my_user.last_name = "Bar"
-        my_user.email = "airbnb@mail.com"
-        my_user.password = "root"
-        self.assertEqual(my_user.__str__(),
-                         f'[{my_user.__class__.__name__}] '
-                         f'({my_user.id}) {my_user.__dict__}')
+        self.assertTrue(isinstance(my_user, BaseModel))
+
+    def test_types(self):
+        """ Test attributes of User"""
+        my_user = User()
+        self.assertTrue(type(my_user.email) == str)
+        self.assertTrue(type(my_user.password) == str)
+        self.assertTrue(type(my_user.first_name) == str)
+        self.assertTrue(type(my_user.last_name) == str)
+
+
+if __name__ == "__main__":
+    unittest.main()

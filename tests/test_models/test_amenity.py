@@ -2,15 +2,26 @@
 """ unittest Amenity module"""
 import unittest
 from models.amenity import Amenity
+from models.base_model import BaseModel
 
 
 class TestAmenity(unittest.TestCase):
     """ class for test cases related with the Amenity class"""
 
-    def test_amenity(self):
-        """ Test all Amenity class attributes"""
-        my_amenity = Amenity()
-        my_amenity.name = "Spa"
-        self.assertEqual(my_amenity.__str__(),
-                         f'[{my_amenity.__class__.__name__}] '
-                         f'({my_amenity.id}) {my_amenity.__dict__}')
+    def setUp(self):
+        """ Return class attributes"""
+        Amenity.name = ""
+
+    def test_instance(self):
+        """ Test if Amenity is instance of BaseModel"""
+        my_Amenity = Amenity()
+        self.assertTrue(isinstance(my_Amenity, BaseModel))
+
+    def test_types(self):
+        """ Test attributes of Amenity"""
+        my_Amenity = Amenity()
+        self.assertTrue(type(my_Amenity.name) == str)
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -2,18 +2,28 @@
 """ unittest City module"""
 import unittest
 from models.city import City
-from models.state import State
+from models.base_model import BaseModel
 
 
 class TestCity(unittest.TestCase):
     """ class for test cases related with the City class"""
 
-    def test_city(self):
-        """ Test all City class attributes"""
+    def setUp(self):
+        """ Return class attributes"""
+        City.state_id = ""
+        City.name = ""
+
+    def test_instance(self):
+        """ Test if City is instance of BaseModel"""
         my_city = City()
-        my_state = State()
-        my_city.state_id = my_state.id
-        my_city.name = "Montevideo"
-        self.assertEqual(my_city.__str__(),
-                         f'[{my_city.__class__.__name__}] '
-                         f'({my_city.id}) {my_city.__dict__}')
+        self.assertTrue(isinstance(my_city, BaseModel))
+
+    def test_types(self):
+        """ Test attributes of City"""
+        my_city = City()
+        self.assertTrue(type(my_city.state_id) == str)
+        self.assertTrue(type(my_city.name) == str)
+
+
+if __name__ == "__main__":
+    unittest.main()

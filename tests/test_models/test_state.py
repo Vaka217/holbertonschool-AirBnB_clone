@@ -2,15 +2,22 @@
 """ unittest State module"""
 import unittest
 from models.state import State
+from models.base_model import BaseModel
 
 
 class TestState(unittest.TestCase):
     """ class for test cases related with the State class"""
 
-    def test_state(self):
-        """ Test all State class attributes"""
+    def setUp(self):
+        """ Return class attributes"""
+        State.name = ""
+
+    def test_instance(self):
+        """ Test if State is instance of BaseModel"""
         my_state = State()
-        my_state.name = "Texas"
-        self.assertEqual(my_state.__str__(),
-                         f'[{my_state.__class__.__name__}] '
-                         f'({my_state.id}) {my_state.__dict__}')
+        self.assertTrue(isinstance(my_state, BaseModel))
+
+    def test_types(self):
+        """ Test attributes of State"""
+        my_state = State()
+        self.assertTrue(type(my_state.name) == str)

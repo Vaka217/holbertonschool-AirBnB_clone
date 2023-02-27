@@ -2,21 +2,30 @@
 """ unittest Review module"""
 import unittest
 from models.review import Review
-from models.place import Place
-from models.user import User
+from models.base_model import BaseModel
 
 
 class TestReview(unittest.TestCase):
     """ class for test cases related with the Review class"""
 
-    def test_review(self):
-        """ Test all Review class attributes"""
+    def setUp(self):
+        """ Return class attributes"""
+        Review.place_id = ""
+        Review.user_id = ""
+        Review.text = ""
+
+    def test_instance(self):
+        """ Test if Review is instance of BaseModel"""
         my_review = Review()
-        my_place = Place()
-        my_user = User()
-        my_review.place_id = my_place.id
-        my_review.user_id = my_user.id
-        my_review.text = "Tremendo lugar"
-        self.assertEqual(my_review.__str__(),
-                         f'[{my_review.__class__.__name__}] '
-                         f'({my_review.id}) {my_review.__dict__}')
+        self.assertTrue(isinstance(my_review, BaseModel))
+
+    def test_types(self):
+        """ Test attributes of Review"""
+        my_review = Review()
+        self.assertTrue(type(my_review.place_id) == str)
+        self.assertTrue(type(my_review.user_id) == str)
+        self.assertTrue(type(my_review.text) == str)
+
+
+if __name__ == "__main__":
+    unittest.main()

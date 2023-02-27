@@ -9,6 +9,8 @@ from models.engine.file_storage import FileStorage
 from contextlib import redirect_stdout
 from pathlib import Path
 import os
+from models import storage
+import json
 
 
 class TestFileStorage(unittest.TestCase):
@@ -54,19 +56,13 @@ class TestFileStorage(unittest.TestCase):
 
     def test_save(self):
         """ Test for FileStorage save() method"""
-        fileobj = FileStorage()
         baseobj = BaseModel()
-        fileobj.new(baseobj)
-        prev_dict = fileobj.all()
-        fileobj.save()
-        fileobj.reload()
-        new_dict = fileobj.all()
-        for key in prev_dict:
-            prev_key = key
-        for key in new_dict:
-            new_key = key
-        self.assertEqual(prev_dict[prev_key].to_dict(),
-                         new_dict[new_key].to_dict())
+        baseobj.save()
+        storage.save()
+        with open('file.json') as f:
+            dict_save = json.load(f)
+            self.assertEqual(baseobj.to_dict(),
+                             dict_save.get(f'BaseModel.{baseobj.id}'))
 
     def test_reload(self):
         """ Test for FileStorage reload() method when empty"""
@@ -79,3 +75,7 @@ class TestFileStorage(unittest.TestCase):
         fileobj.reload()
         new_dict = fileobj.all()
         self.assertTrue(prev_dict == new_dict)
+
+
+if __name__ == "__main__":
+    unittest.main()
