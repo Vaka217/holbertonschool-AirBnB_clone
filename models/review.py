@@ -1,13 +1,15 @@
 #!/usr/bin/python3
-""" Module doc"""
+"""Needed modules."""
 from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    """ Class doc"""
+    """Review class."""
+
     place_id = ""
     user_id = ""
     text = ""
 
-    def __init__(self, args, **kwargs):
-        BaseModel.__init__(self, args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        """Initialize with BaseModel."""
+        BaseModel.__init__(self, *args, **kwargs)

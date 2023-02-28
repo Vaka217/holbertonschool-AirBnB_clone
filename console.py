@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Module doc"""
+"""Needed modules."""
 import cmd
 import json
 from models.base_model import BaseModel
@@ -14,7 +14,8 @@ from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
-    """ Class doc"""
+    """Console class."""
+
     prompt = "(hbnb) "
     file = None
     classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
@@ -22,19 +23,20 @@ class HBNBCommand(cmd.Cmd):
                'Review': Review}
 
     def do_quit(self, arg):
-        """ do_quit doc"""
+        """Apply quit to the console."""
         return True
 
     def do_EOF(self, arg):
-        """ do_EOF doc"""
+        """Exit when eof method."""
         print()
         return True
 
     def emptyline(self):
+        """Pass when no command found."""
         pass
 
     def do_create(self, argv):
-        """ do_create doc"""
+        """Create a new class and asigns it an id."""
         inputs = argv.split()
         if not inputs:
             print("** class name missing **")
@@ -46,7 +48,7 @@ class HBNBCommand(cmd.Cmd):
             instance.save()
 
     def do_show(self, argv):
-        """ do_show doc"""
+        """Show all contents based on id or all if dont specified."""
         inputs = argv.split()
         if not inputs:
             print("** class name missing **")
@@ -65,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
                     print(all_objs[key])
 
     def do_all(self, argv):
-        """ do_all doc"""
+        """Show all contents based on id or all if dont specified."""
         inputs = argv.split()
         if not inputs:
             print(list((storage.all())))
@@ -80,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
             print(list_all)
 
     def do_destroy(self, argv):
-        """ do_destroy doc"""
+        """Destroy a class method."""
         inputs = argv.split()
         if not inputs:
             print("** class name missing **")
@@ -97,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def do_update(self, argv):
-        """ do_update doc"""
+        """Add an attribute in a class."""
         inputs = argv.split()
         if not inputs:
             print("** class name missing **")

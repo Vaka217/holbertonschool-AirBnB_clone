@@ -1,20 +1,21 @@
 #!/usr/bin/python3
-""" Module doc"""
+"""Needed modules."""
 import uuid
 from datetime import datetime
 from models import storage
 
 
 class BaseModel:
-    """ Class doc"""
+    """BaseModel class."""
+
     def __init__(self, *args, **kwargs):
-        """ __init__ doc"""
+        """Initialize class."""
         if kwargs:
-            for key, value in kwargs.items():
-                if key == 'created_at' or key == 'updated_at':
-                    setattr(self, key, datetime.fromisoformat(value))
-                elif key != '__class__':
-                    setattr(self, key, value)
+            setattr(self, "created_at",
+                    datetime.fromisoformat(kwargs["created_at"]))
+            setattr(self, "updated_at",
+                    datetime.fromisoformat(kwargs["updated_at"]))
+            setattr(self, "id", kwargs["id"])
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -22,16 +23,16 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self):
-        """ __str__ doc"""
+        """Modify str method."""
         return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
 
     def save(self):
-        """ save doc"""
+        """Update update_at with current datetime."""
         self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
-        """ to_dict doc"""
+        """Return a dictionary containing all keys/values of __dict__ of the instance."""
         new_dict = self.__dict__.copy()
         new_dict.update({'__class__': self.__class__.__name__,
                          'created_at': self.created_at.isoformat(),

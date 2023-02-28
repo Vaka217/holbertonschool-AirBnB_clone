@@ -1,15 +1,15 @@
 #!/usr/bin/python3
-""" unittest Place module"""
+"""unittest Place module."""
 import unittest
 from models.place import Place
 from models.base_model import BaseModel
 
 
 class TestPlace(unittest.TestCase):
-    """ class for test cases related with the Place class"""
+    """class for test cases related with the Place class."""
 
     def setUp(self):
-        """ Return class attributes"""
+        """Return class attributes."""
         my_place = Place()
         my_place.city_id = ""
         my_place.user_id = ""
@@ -24,13 +24,13 @@ class TestPlace(unittest.TestCase):
         my_place.amenity_ids = []
 
     def test_instance(self):
-        """ Test if Place is instance of BaseModel"""
+        """Test if Place is instance of BaseModel."""
         my_place = Place()
         self.assertTrue(isinstance(my_place, BaseModel))
         self.assertTrue(isinstance(my_place, Place))
 
     def test_has(self):
-        """ Test if Place has all attributes"""
+        """Test if Place has all attributes."""
         my_place = Place()
         self.assertTrue(hasattr(my_place, "city_id"))
         self.assertTrue(hasattr(my_place, "user_id"))
@@ -45,7 +45,7 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(hasattr(my_place, "amenity_ids"))
 
     def test_types(self):
-        """ Test attributes of Place"""
+        """Test attributes of Place."""
         my_place = Place()
         self.assertTrue(type(my_place.city_id) == str)
         self.assertTrue(type(my_place.user_id) == str)
@@ -60,7 +60,7 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(type(my_place.amenity_ids) == list)
 
     def test_initialization(self):
-        """ Test attributes initialization of Place object"""
+        """Test attributes initialization of Place object."""
         my_place = Place()
         self.assertEqual(my_place.city_id, "")
         self.assertEqual(my_place.user_id, "")

@@ -1,35 +1,35 @@
 #!/usr/bin/python3
-""" unittest State module"""
+"""unittest State module."""
 import unittest
 from models.state import State
 from models.base_model import BaseModel
 
 
 class TestState(unittest.TestCase):
-    """ class for test cases related with the State class"""
+    """class for test cases related with the State class."""
 
     def setUp(self):
-        """ Return class attributes"""
+        """Return class attributes."""
         State.name = ""
 
     def test_instance(self):
-        """ Test if State is instance of BaseModel"""
+        """Test if State is instance of BaseModel."""
         my_state = State()
         self.assertTrue(isinstance(my_state, BaseModel))
         self.assertTrue(isinstance(my_state, State))
 
     def test_has(self):
-        """ Test if State has all attributes"""
+        """Test if State has all attributes."""
         my_state = State()
         self.assertTrue(hasattr(my_state, "name"))
 
     def test_types(self):
-        """ Test attributes of State"""
+        """Test attributes of State."""
         my_state = State()
         self.assertTrue(type(my_state.name) == str)
 
     def test_initialization(self):
-        """ Test attributes initialization of Review object"""
+        """Test attributes initialization of Review object."""
         my_state = State()
         self.assertEqual(my_state.name, "")
 

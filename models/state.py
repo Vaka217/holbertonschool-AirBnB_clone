@@ -1,11 +1,13 @@
 #!/usr/bin/python3
-""" Module doc"""
+"""Import BaseModel."""
 from models.base_model import BaseModel
 
 
 class State(BaseModel):
-    """ Class doc"""
+    """State class."""
+
     name = ""
 
-    def __init__(self, args, **kwargs):
-        BaseModel.__init__(self, args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        """Initialize with BaseModel."""
+        BaseModel.__init__(self, *args, **kwargs)

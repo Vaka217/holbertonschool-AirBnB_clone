@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-""" Module doc"""
+"""Needed modules."""
 from models.base_model import BaseModel
 
 
 class Place(BaseModel):
-    """ Class doc"""
+    """Place class."""
+
     city_id = ""
     user_id = ""
     name = ""
@@ -17,5 +18,6 @@ class Place(BaseModel):
     longitude = 0.0
     amenity_ids = []
 
-    def __init__(self, args, **kwargs):
-        BaseModel.__init__(self, args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        """Initialize with BaseModel."""
+        BaseModel.__init__(self, *args, **kwargs)
