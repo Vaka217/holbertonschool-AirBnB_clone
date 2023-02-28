@@ -16,6 +16,12 @@ class TestState(unittest.TestCase):
         """ Test if State is instance of BaseModel"""
         my_state = State()
         self.assertTrue(isinstance(my_state, BaseModel))
+        self.assertTrue(isinstance(my_state, State))
+
+    def test_has(self):
+        """ Test if State has all attributes"""
+        my_state = State()
+        self.assertTrue(hasattr(my_state, "name"))
 
     def test_types(self):
         """ Test attributes of State"""

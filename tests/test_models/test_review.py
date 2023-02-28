@@ -20,6 +20,13 @@ class TestReview(unittest.TestCase):
         self.assertTrue(isinstance(my_review, BaseModel))
         self.assertTrue(isinstance(my_review, Review))
 
+    def test_has(self):
+        """ Test if Review has all attributes"""
+        my_review = Review()
+        self.assertTrue(hasattr(my_review, "place_id"))
+        self.assertTrue(hasattr(my_review, "user_id"))
+        self.assertTrue(hasattr(my_review, "text"))
+
     def test_types(self):
         """ Test attributes of Review"""
         my_review = Review()
@@ -27,8 +34,8 @@ class TestReview(unittest.TestCase):
         self.assertTrue(type(my_review.user_id) == str)
         self.assertTrue(type(my_review.text) == str)
 
-    def test_initilization(self):
-        """ Test attributes initilization of Review object"""
+    def test_initialization(self):
+        """ Test attributes initialization of Review object"""
         review = Review()
         self.assertEqual(review.place_id, "")
         self.assertEqual(review.user_id, "")

@@ -17,6 +17,13 @@ class TestCity(unittest.TestCase):
         """ Test if City is instance of BaseModel"""
         my_city = City()
         self.assertTrue(isinstance(my_city, BaseModel))
+        self.assertTrue(isinstance(my_city, City))
+
+    def test_has(self):
+        """ Test if City has all attributes"""
+        my_city = City()
+        self.assertTrue(hasattr(my_city, "state_id"))
+        self.assertTrue(hasattr(my_city, "name"))
 
     def test_types(self):
         """ Test attributes of City"""

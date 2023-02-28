@@ -19,6 +19,15 @@ class TestUser(unittest.TestCase):
         """ Test if User is instance of BaseModel"""
         my_user = User()
         self.assertTrue(isinstance(my_user, BaseModel))
+        self.assertTrue(isinstance(my_user, User))
+
+    def test_has(self):
+        """ Test if User has all attributes"""
+        my_user = User()
+        self.assertTrue(hasattr(my_user, "email"))
+        self.assertTrue(hasattr(my_user, "password"))
+        self.assertTrue(hasattr(my_user, "first_name"))
+        self.assertTrue(hasattr(my_user, "last_name"))
 
     def test_types(self):
         """ Test attributes of User"""

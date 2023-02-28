@@ -29,6 +29,21 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(isinstance(my_place, BaseModel))
         self.assertTrue(isinstance(my_place, Place))
 
+    def test_has(self):
+        """ Test if Place has all attributes"""
+        my_place = Place()
+        self.assertTrue(hasattr(my_place, "city_id"))
+        self.assertTrue(hasattr(my_place, "user_id"))
+        self.assertTrue(hasattr(my_place, "name"))
+        self.assertTrue(hasattr(my_place, "description"))
+        self.assertTrue(hasattr(my_place, "number_rooms"))
+        self.assertTrue(hasattr(my_place, "number_bathrooms"))
+        self.assertTrue(hasattr(my_place, "max_guest"))
+        self.assertTrue(hasattr(my_place, "price_by_night"))
+        self.assertTrue(hasattr(my_place, "latitude"))
+        self.assertTrue(hasattr(my_place, "longitude"))
+        self.assertTrue(hasattr(my_place, "amenity_ids"))
+
     def test_types(self):
         """ Test attributes of Place"""
         my_place = Place()

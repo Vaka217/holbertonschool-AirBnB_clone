@@ -16,6 +16,12 @@ class TestAmenity(unittest.TestCase):
         """ Test if Amenity is instance of BaseModel"""
         my_amenity = Amenity()
         self.assertTrue(isinstance(my_amenity, BaseModel))
+        self.assertTrue(isinstance(my_amenity, Amenity))
+
+    def test_has(self):
+        """ Test if Amenity has all attributes"""
+        my_amenity = Amenity()
+        self.assertTrue(hasattr(my_amenity, "name"))
 
     def test_types(self):
         """ Test attributes of Amenity"""

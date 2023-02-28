@@ -17,6 +17,7 @@ class TestFileStorage(unittest.TestCase):
     """ class for test cases related with the FileStorage class"""
 
     base = BaseModel()
+    maxDiff = None
 
     def setUp(self):
         """ Test file saving"""
@@ -65,12 +66,14 @@ class TestFileStorage(unittest.TestCase):
                              dict_save.get(f'BaseModel.{baseobj.id}'))
 
     def test_reload(self):
-        """ Test for FileStorage reload() method when empty"""
-        fileobj = FileStorage()
-        fileobj.save()
-        objs = fileobj.all()
-        for value in objs.values():
-            self.assertTrue(isinstance(value, BaseModel))
+        """ Test for FileStorage reload() method"""
+        self.base.save()
+        objs = storage.all()
+        FileStorage.__objects = {}
+        self.assertNotEqual(FileStorage.__objects, objs)
+        storage.reload()
+        for key, value in storage.all().items():
+            self.assertEqual(objs[key].to_dict(), value.to_dict())
 
 
 if __name__ == "__main__":

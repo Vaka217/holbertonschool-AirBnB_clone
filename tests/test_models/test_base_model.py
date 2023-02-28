@@ -64,6 +64,12 @@ class TestBase(unittest.TestCase):
         base.save()
         self.assertNotEqual(prev_updated_at, base.updated_at)
 
+    def test_save_2(self):
+        """ Test of BaseModel save() method check file"""
+        base = BaseModel()
+        base.save()
+        with open('file.json') as f:
+            self.assertIn(f"{base.__class__.__name__}.{base.id}", f.read())
 
 if __name__ == "__main__":
     unittest.main()
