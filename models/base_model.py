@@ -32,7 +32,8 @@ class BaseModel:
         storage.save()
 
     def to_dict(self):
-        """Return a dictionary containing all keys/values of __dict__ of the instance."""
+        """Return a dictionary containing all keys/values of
+        __dict__ of the instance."""
         new_dict = self.__dict__.copy()
         new_dict.update({'__class__': self.__class__.__name__,
                          'created_at': self.created_at.isoformat(),
