@@ -27,6 +27,7 @@ class TestPlace(unittest.TestCase):
         """ Test if Place is instance of BaseModel"""
         my_place = Place()
         self.assertTrue(isinstance(my_place, BaseModel))
+        self.assertTrue(isinstance(my_place, Place))
 
     def test_types(self):
         """ Test attributes of Place"""
@@ -42,6 +43,21 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(type(my_place.latitude) == float)
         self.assertTrue(type(my_place.longitude) == float)
         self.assertTrue(type(my_place.amenity_ids) == list)
+
+    def test_initialization(self):
+        """ Test attributes initialization of Place object"""
+        my_place = Place()
+        self.assertEqual(my_place.city_id, "")
+        self.assertEqual(my_place.user_id, "")
+        self.assertEqual(my_place.name, "")
+        self.assertEqual(my_place.description, "")
+        self.assertEqual(my_place.number_rooms, 0)
+        self.assertEqual(my_place.number_bathrooms, 0)
+        self.assertEqual(my_place.max_guest, 0)
+        self.assertEqual(my_place.price_by_night, 0)
+        self.assertEqual(my_place.latitude, 0.0)
+        self.assertEqual(my_place.longitude, 0.0)
+        self.assertEqual(my_place.amenity_ids, [])
 
 
 if __name__ == "__main__":

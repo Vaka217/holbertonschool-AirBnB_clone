@@ -28,6 +28,14 @@ class TestUser(unittest.TestCase):
         self.assertTrue(type(my_user.first_name) == str)
         self.assertTrue(type(my_user.last_name) == str)
 
+    def test_initialization(self):
+        """ Test attributes initialization of Review object"""
+        my_user = User()
+        self.assertEqual(my_user.email, "")
+        self.assertEqual(my_user.password, "")
+        self.assertEqual(my_user.first_name, "")
+        self.assertEqual(my_user.last_name, "")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -21,3 +21,12 @@ class TestState(unittest.TestCase):
         """ Test attributes of State"""
         my_state = State()
         self.assertTrue(type(my_state.name) == str)
+
+    def test_initialization(self):
+        """ Test attributes initialization of Review object"""
+        my_state = State()
+        self.assertEqual(my_state.name, "")
+
+
+if __name__ == "__main__":
+    unittest.main()

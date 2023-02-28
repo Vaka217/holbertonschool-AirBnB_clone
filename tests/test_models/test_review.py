@@ -18,6 +18,7 @@ class TestReview(unittest.TestCase):
         """ Test if Review is instance of BaseModel"""
         my_review = Review()
         self.assertTrue(isinstance(my_review, BaseModel))
+        self.assertTrue(isinstance(my_review, Review))
 
     def test_types(self):
         """ Test attributes of Review"""
@@ -25,6 +26,13 @@ class TestReview(unittest.TestCase):
         self.assertTrue(type(my_review.place_id) == str)
         self.assertTrue(type(my_review.user_id) == str)
         self.assertTrue(type(my_review.text) == str)
+
+    def test_initilization(self):
+        """ Test attributes initilization of Review object"""
+        review = Review()
+        self.assertEqual(review.place_id, "")
+        self.assertEqual(review.user_id, "")
+        self.assertEqual(review.text, "")
 
 
 if __name__ == "__main__":

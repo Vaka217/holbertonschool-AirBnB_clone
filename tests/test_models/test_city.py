@@ -24,6 +24,12 @@ class TestCity(unittest.TestCase):
         self.assertTrue(type(my_city.state_id) == str)
         self.assertTrue(type(my_city.name) == str)
 
+    def test_initialization(self):
+        """ Test attributes initialization of City object"""
+        my_city = City()
+        self.assertEqual(my_city.state_id, "")
+        self.assertEqual(my_city.name, "")
+
 
 if __name__ == "__main__":
     unittest.main()

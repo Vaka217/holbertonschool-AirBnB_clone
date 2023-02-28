@@ -14,13 +14,18 @@ class TestAmenity(unittest.TestCase):
 
     def test_instance(self):
         """ Test if Amenity is instance of BaseModel"""
-        my_Amenity = Amenity()
-        self.assertTrue(isinstance(my_Amenity, BaseModel))
+        my_amenity = Amenity()
+        self.assertTrue(isinstance(my_amenity, BaseModel))
 
     def test_types(self):
         """ Test attributes of Amenity"""
-        my_Amenity = Amenity()
-        self.assertTrue(type(my_Amenity.name) == str)
+        my_amenity = Amenity()
+        self.assertTrue(type(my_amenity.name) == str)
+
+    def test_initialization(self):
+        """ Test attributes initialization of Amenity object"""
+        my_amenity = Amenity()
+        self.assertEqual(my_amenity.name, "")
 
 
 if __name__ == "__main__":

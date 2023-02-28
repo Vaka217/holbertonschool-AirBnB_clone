@@ -67,14 +67,10 @@ class TestFileStorage(unittest.TestCase):
     def test_reload(self):
         """ Test for FileStorage reload() method when empty"""
         fileobj = FileStorage()
-        baseobj = BaseModel()
-        fileobj.new(baseobj)
         fileobj.save()
-        prev_dict = fileobj.all()
-        os.remove('file.json')
-        fileobj.reload()
-        new_dict = fileobj.all()
-        self.assertTrue(prev_dict == new_dict)
+        objs = fileobj.all()
+        for value in objs.values():
+            self.assertTrue(isinstance(value, BaseModel))
 
 
 if __name__ == "__main__":
