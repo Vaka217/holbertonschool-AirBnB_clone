@@ -10,7 +10,8 @@ class TestState(unittest.TestCase):
 
     def setUp(self):
         """Return class attributes."""
-        State.name = ""
+        my_state = State()
+        my_state.name = ""
 
     def test_instance(self):
         """Test if State is instance of BaseModel."""

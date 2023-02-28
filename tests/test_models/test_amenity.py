@@ -10,7 +10,8 @@ class TestAmenity(unittest.TestCase):
 
     def setUp(self):
         """Return class attributes."""
-        Amenity.name = ""
+        my_anemity = Amenity()
+        my_anemity.name = ""
 
     def test_instance(self):
         """Test if Amenity is instance of BaseModel."""

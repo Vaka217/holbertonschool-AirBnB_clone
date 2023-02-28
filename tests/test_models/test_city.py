@@ -10,8 +10,9 @@ class TestCity(unittest.TestCase):
 
     def setUp(self):
         """Return class attributes."""
-        City.state_id = ""
-        City.name = ""
+        my_city = City()
+        my_city.state_id = ""
+        my_city.name = ""
 
     def test_instance(self):
         """Test if City is instance of BaseModel."""

@@ -10,10 +10,11 @@ class TestUser(unittest.TestCase):
 
     def setUp(self):
         """Return class attributes."""
-        User.email = ""
-        User.password = ""
-        User.first_name = ""
-        User.last_name = ""
+        my_user = User()
+        my_user.email = ""
+        my_user.password = ""
+        my_user.first_name = ""
+        my_user.last_name = ""
 
     def test_instance(self):
         """Test if User is instance of BaseModel."""

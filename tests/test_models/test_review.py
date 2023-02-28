@@ -10,9 +10,10 @@ class TestReview(unittest.TestCase):
 
     def setUp(self):
         """Return class attributes."""
-        Review.place_id = ""
-        Review.user_id = ""
-        Review.text = ""
+        my_review = Review()
+        my_review.place_id = ""
+        my_review.user_id = ""
+        my_review.text = ""
 
     def test_instance(self):
         """Test if Review is instance of BaseModel."""
