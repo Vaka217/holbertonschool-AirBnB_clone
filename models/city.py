@@ -7,3 +7,6 @@ class City(BaseModel):
     """ Class doc"""
     state_id = ""
     name = ""
+
+    def __init__(self, args, **kwargs):
+        BaseModel.__init__(self, args, **kwargs)

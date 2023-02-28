@@ -1,16 +1,13 @@
 #!/usr/bin/python3
 """ unittest FileStorage module"""
 import unittest
-import io
-from datetime import datetime
-from unittest.mock import patch
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
-from contextlib import redirect_stdout
 from pathlib import Path
 import os
 from models import storage
 import json
+from os import path
 
 
 class TestFileStorage(unittest.TestCase):
@@ -67,13 +64,14 @@ class TestFileStorage(unittest.TestCase):
 
     def test_reload(self):
         """ Test for FileStorage reload() method"""
-        self.base.save()
-        objs = storage.all()
-        FileStorage.__objects = {}
-        self.assertNotEqual(FileStorage.__objects, objs)
+        base = BaseModel()
+        key = 'BaseModel' + '.' + base.id
+        storage.save()
+        self.assertTrue(path.isfile('file.json'))
+        FileStorage._FileStorage__objects = {}
         storage.reload()
-        for key, value in storage.all().items():
-            self.assertEqual(objs[key].to_dict(), value.to_dict())
+        self.assertTrue(key in storage.all().keys())
+        self.assertEqual(base.id, storage.all()[key].id)
 
 
 if __name__ == "__main__":
